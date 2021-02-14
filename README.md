@@ -24,7 +24,7 @@ you will find a zip file for PCB manufacturing.
 
 ### Install and prepare avrdude
 
->$ sudo apt install make binutils-avr avrdude avr-libc gcc-avr  
+>$ sudo apt install make binutils-avr avrdude avr-libc gcc-avr cross-avr-gcc9  
 >
 >$ usermod -a -G dialout,plugdev $USER  
 
@@ -36,6 +36,7 @@ Some avrdude switches:
     -b baudrate; override the RS-232 connection baud rate
     -e ; causes a chip erase to be executed
     -F ; override device signature check
+    -B bitclock; specify the bit clock period for the JTAG interface or the ISP clock
     -v ; enable verbose output, more -v options increase verbosity level
     -U <memtype:op:filename[:format]>
         flash; the flash ROM of the device
@@ -45,11 +46,21 @@ Some avrdude switches:
         hfuse; the high fuse byte
         lfuse; the low fuse byte
         boot; the boot flash area of ATxmega devices
+    -t ; enter the interactive “terminal” mode
 
 More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
+
+To erase flash memory (bootloader):  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -t
+>
+>avrdude> erase
+
 ### ATmega328P with ST7735 1.8" OLED screen
 
 #### Bootloader
+
+Perhaps bootloader isn't needed for ATmega328?  
 
 Build bootloader  
 
@@ -107,6 +118,16 @@ Upload software
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U flash:w:mega328_color_kit.hex
 
+Alternative  
+
+Skip the above 'make' and 'avrdude ...', and instead do  
+
+>$ make upload make
+
+Write fuses  
+
+>$ make fuses-crystal
+
 Clean up  
 
 >$ make clean
@@ -124,3 +145,27 @@ Hex file and lock bits
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
 
 -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
+
+I tried to re-program a problematic GM328 that was not possible to calibrate.
+https://www.youtube.com/watch?v=JCP7oWG3D3w
+No matter what mega328_GM328 version I used from https://www.mikrocontroller.net/...
+I always get a white blank screen.  The fuses I used are: lfuse=0xF7 hfuse=0xD9 efuse=0xFF
+
+https://saturn.ffzg.hr/rot13/index.cgi?avr_component_tester
+avrdude -c usbasp -B 20 -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0x04:m
+
+https://github.com/blurpy/transistor-tester
+fuses_lo = 0xf7
+fuses_hi = 0xd9
+fuses_ext = 0xfc
+lock_byte = 0xff
+I use a TL866II Plus universal programmer together with the minipro open source software for Linux. See https://github.com/blurpy/minipro for more about how to use.
+With the chip in the programmer, just run these commands:
+Erase chip: minipro -p "ATMEGA328P@DIP28" -E
+Write eeprom: minipro -p "ATMEGA328P@DIP28" -c data -w ComponentTester.eep -e
+Write flash: minipro -p "ATMEGA328P@DIP28" -c code -w ComponentTester.hex -e
+Write fuses: minipro -p "ATMEGA328P@DIP28" -c config -w ComponentTester.cfg -e
+That should be it.
+
+$ make fuses-crystal
+avrdude -c avrispmkII -B 200  -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
