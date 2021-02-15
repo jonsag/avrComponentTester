@@ -56,13 +56,7 @@ To erase flash memory (bootloader):
 >
 >avrdude> erase
 
-### ATmega328P with ST7735 1.8" OLED screen
-
-#### Fuse bits
-
-Fuse bit calculator  
-
-[https://www.engbedded.com/fusecalc/](https://www.engbedded.com/fusecalc/)  
+### ATmega328P with ST7735 1.8" OLED screen 
 
 #### Bootloader
 
@@ -137,6 +131,14 @@ Write fuses
 Clean up  
 
 >$ make clean
+
+## Resources
+
+### Fuse bits
+
+Fuse bit calculator  
+
+[https://www.engbedded.com/fusecalc/](https://www.engbedded.com/fusecalc/) 
 
 ## Misc notes
 
