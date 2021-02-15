@@ -385,9 +385,14 @@ INHIBIT_SLEEP_MODE = 0
 
 # Select your programmer type, speed and port, if you wish to use avrdude.
 # setting for DIAMEX ALL_AVR, Atmel AVRISP-mkII
+#PROGRAMMER=avrispmkII
+#BitClock=1.0
+#PORT=usb
+# setting for Arduino as ISP, atmega328p
 PROGRAMMER=avrisp
 BitClock=1.0
 PORT=/dev/ttyUSB0
+AVRDUDE_BAUD = -b 9600
 # setting for USBasp
 #PROGRAMMER=usbasp
 #BitClock=20

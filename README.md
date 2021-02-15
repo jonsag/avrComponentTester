@@ -8,6 +8,14 @@ Adapted from project at [https://www.mikrocontroller.net/articles/AVR_Transistor
 
 ## Hardware
 
+### Programmer
+
+You will need an avr programmer like [this one](https://github.com/jonsag/ardAVRProgrammer).  
+
+If you use an another programmer you will have to adapt the avrdude -c switch in the commands below.  
+
+### Components tester
+
 Look in directory  
 
     KiCAD/avrComponentTester-Jose_Miquel_2-layer
@@ -30,35 +38,9 @@ you will find a zip file for PCB manufacturing.
 >
 >$ usermod -a -G dialout,plugdev $USER  
 
-Some avrdude switches:
+You have to log out user to make new groups available.  
 
-    -p partno; what type of part that is connected to the programmer
-    -P port; port to identify the device to which the programmer is attached
-    -c programmer-id; the programmer to be used
-    -b baudrate; override the RS-232 connection baud rate
-    -e ; causes a chip erase to be executed
-    -F ; override device signature check
-    -B bitclock; specify the bit clock period for the JTAG interface or the ISP clock
-    -v ; enable verbose output, more -v options increase verbosity level
-    -U <memtype:op:filename[:format]>
-        flash; the flash ROM of the device
-            w; read the specified file and write it to the specified device memory
-        lock; the lock byte
-        efuse; the extended fuse byte
-        hfuse; the high fuse byte
-        lfuse; the low fuse byte
-        boot; the boot flash area of ATxmega devices
-    -t ; enter the interactive “terminal” mode
-
-More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
-
-To erase flash memory (bootloader):  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -t
->
->avrdude> erase
-
-### ATmega328P with ST7735 1.8" OLED screen 
+### ATmega328P with ST7735 1.8" OLED screen
 
 #### Bootloader
 
@@ -68,7 +50,7 @@ Build bootloader
 
 >$ cd Bootloader/optiboot
 >
->$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0
+>$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0 LED_DATA_FLASH=1
 
 Now you got six new files:  
 
@@ -120,7 +102,8 @@ Upload software
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -U flash:w:mega328_color_kit.hex
 
-Alternative  
+Alternative:  
+If you are using another programmer than Arduino as ISP you have to adapt the Makefile accordingly.  
 
 Skip the above 'make' and 'avrdude ...', and instead do  
 
@@ -141,6 +124,37 @@ Clean up
 Fuse bit calculator  
 
 [https://www.engbedded.com/fusecalc/](https://www.engbedded.com/fusecalc/) 
+
+### avrdude
+
+Some avrdude switches:
+
+    -p partno; what type of part that is connected to the programmer
+    -P port; port to identify the device to which the programmer is attached
+    -c programmer-id; the programmer to be used
+    -b baudrate; override the RS-232 connection baud rate
+    -e ; causes a chip erase to be executed
+    -F ; override device signature check
+    -B bitclock; specify the bit clock period for the JTAG interface or the ISP clock
+    -D ; disable auto erase for flash
+    -v ; enable verbose output, more -v options increase verbosity level
+    -U <memtype:op:filename[:format]>
+        flash; the flash ROM of the device
+            w; read the specified file and write it to the specified device memory
+        lock; the lock byte
+        efuse; the extended fuse byte
+        hfuse; the high fuse byte
+        lfuse; the low fuse byte
+        boot; the boot flash area of ATxmega devices
+    -t ; enter the interactive “terminal” mode
+
+More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
+
+#### Erase avr flash memory  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -t
+>
+>avrdude> erase
 
 ## Misc notes
 
