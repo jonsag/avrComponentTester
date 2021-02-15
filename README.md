@@ -1,10 +1,10 @@
 # avrComponentTester
 
-Adaptions of project at https://www.mikrocontroller.net/articles/AVR_Transistortester
+Adapted from project at [https://www.mikrocontroller.net/articles/AVR_Transistortester](https://www.mikrocontroller.net/articles/AVR_Transistortester)
 
 ## Download repository
 
->$ git clone https://github.com/jonsag/avrComponentTester.git
+>$ git clone [https://github.com/jonsag/avrComponentTester.git](https://github.com/jonsag/avrComponentTester.git)
 
 ## Hardware
 
@@ -58,6 +58,12 @@ To erase flash memory (bootloader):
 
 ### ATmega328P with ST7735 1.8" OLED screen
 
+#### Fuse bits
+
+Fuse bit calculator  
+
+[https://www.engbedded.com/fusecalc/](https://www.engbedded.com/fusecalc/)  
+
 #### Bootloader
 
 Perhaps bootloader isn't needed for ATmega328?  
@@ -66,9 +72,9 @@ Build bootloader
 
 >$ cd Bootloader/optiboot
 >
->$ make atmega328p LED_START_FLASHES=0 LED_DATA_FLASH=1
+>$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0
 
-Now you got several new files:  
+Now you got six new files:  
 
     baudcheck.tmp.sh
     optiboot_atmega328p.hex
@@ -79,11 +85,11 @@ Now you got several new files:
 
 Burn bootloader  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -U flash:w:optiboot_atmega328p.hex:i -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m
 
 (or  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:optiboot_atmega328p.hex -U lock:w:0x0F:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U flash:w:optiboot_atmega328p.hex -U lock:w:0x0F:m
 
 or  
 
@@ -103,7 +109,7 @@ Compile software
 >
 >$ make
 
-This creates several new files:  
+This creates four new files:  
 
     mega328_color_kit.eep
     mega328_color_kit.hex
@@ -116,7 +122,7 @@ and a directory with lots of files in:
 
 Upload software  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U flash:w:mega328_color_kit.hex
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -U flash:w:mega328_color_kit.hex
 
 Alternative  
 
@@ -138,11 +144,11 @@ Don't pay this any attention
 
 Fuse bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
 
 Hex file and lock bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
 
 -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
 

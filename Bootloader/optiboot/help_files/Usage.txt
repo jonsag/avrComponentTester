@@ -24,11 +24,11 @@ make atmega328p
 ***************
 ATmega328P with 16MHz and 115200 Baud.
 
-With the simular call:
+With the similar call:
 *********************
 make atmega328p ISP=1
 *********************
-the optiboot program data will be transfered to the ISP-programmer and additionalys
+the optiboot program data will be transferred to the ISP-programmer and additionally
  all fuses are set.
 You should know, that the Flash memory content is completely erased before
 programming the new bootloader code. Any application program must be programmed
@@ -51,7 +51,7 @@ in the file Windows_usage.txt .
 
 This optiboot bootloader is tested with a Arduino-UNO and -Nano board and with 
 nearly all supported processors (see the list at the end of this ReadMe2).
-Only the AT90CAN64, the ATmega1280/2560, the ATmega16u4 and the ATmega8u2/16u2 are untestet.
+Only the AT90CAN64, the ATmega1280/2560, the ATmega16u4 and the ATmega8u2/16u2 are untested.
 
 The optional implementation of a software UART requires a little more space, but should
 also match to a 512 Byte boot partition.
@@ -70,7 +70,7 @@ The VIRTUAL_BOOT_PARTITION feature is only checked with the tested ATtiny proces
 For all processors without a boot partition the option VIRTUAL_BOOT_PARTITION is
 set automatically.
 Normally the start vector is switched with the fuses (BOOTRST bit) to the
-bootloader start addresss, but this feature is missing at the ATtiny84.
+bootloader start address, but this feature is missing at the ATtiny84.
 If the VIRTUAL_BOOT_PARTITION is selected, the AVR reset vector
 can remain at the application start address (0x0000).
 Instead of switching the Reset start address the Reset interrupt vector of the
@@ -79,7 +79,7 @@ The original start address of the application program is moved to another
 interrupt vector and will be used later by a bootloader timeout.
 For that feature the bootloader try to change the interrupt vectors
 during programming the application program and simulates the correct
-back readed data for a following verify.
+back read data for a following verify.
 The host, which send the data to the bootloader, did not notify the modification.
 But the implemented trick will not work for a second separate verify of
 the Flash content by the host.
@@ -89,13 +89,13 @@ I believe, that it will be better to implement this feature by the application
 program itself.
 One of the difficulties with the patch is, that for Flash memory space above 8K
 the interrupt vector addresses can hold a JMP or also a RJMP instruction!
-Currently the bootloader assumes, that only JMP intructions are used in the 
+Currently the bootloader assumes, that only JMP instructions are used in the 
 interrupt vector table, if the processor has more than 8 kByte flash memory.
 
 =======================================================================================
 Available options
 =======================================================================================
-AVR_FREQ		specifies the frequency (Hz), at which the AVR mikrocontroller should run.
+AVR_FREQ		specifies the frequency (Hz), at which the AVR micro controller should run.
 
 BAUD_RATE		specifies the baud rate for the serial interface.
 			If a value below 100 Baud is specified, optiboot use a
@@ -105,7 +105,7 @@ BAUD_RATE		specifies the baud rate for the serial interface.
 			If a baud rate below 40 is specified, a additional monitoring
 			of the time is omitted with this simpler measurement.
 
-SOFT_UART		Whith this option you select a software UART solution instead of
+SOFT_UART		With this option you select a software UART solution instead of
 			a hardware UART. With the software solutions you are free to select
 			any available port pins.
 
@@ -120,7 +120,7 @@ UART_TX			You can also select the serial output pin for the SOFT_UART Option.
 			You can also select different ports for input and output.
 
 UART_RX=UART_TX         If you specify the same pin for RX and TX, the optiboot program
-                        will switch this pin automatically between inpot and output (one wire).
+                        will switch this pin automatically between input and output (one wire).
                         The transfer program at your PC must tolerate the additional echo characters
                         or you need a special interface electronic to prevent the echoes.
 
@@ -157,7 +157,7 @@ BIGBOOT			This option was earlier required to match the setting of start address
 			The adaption of the correct starting address and the correct setting
 			of the AVR fuses is done now automatically.
 			But the option is not removed. You can use it now to test the
-			automatical adaption or to set the bootloader start address to
+			automatic adaption or to set the bootloader start address to
 			a specific address. The bootloader code will grow for as many
 			bytes, as you specify. 500 additional bytes let the size of
 			the bootloader grow, so that the bootloader start address
@@ -183,7 +183,7 @@ OSCCAL_CORR		This option specifies a correction value for the OSCCAL Byte of the
 			The correction value is only effectual, if the internal RC-oscillator of the AVR processor
 			is used, not with the crystal operation.
 			Because the produced Baud-rate depends directly of the processor clock,
-			a calibrated clock frequency is important for a successfull serial data transfer.
+			a calibrated clock frequency is important for a successful serial data transfer.
 
 FORCE_RSTDISBL		You can set this option to 1, if you plan to set the RSTDISBL feature in the HFUSE.
 			The setting of the RSTDISBL bit (to 0) is detected by optiboot and
@@ -206,7 +206,7 @@ For a C application program ist it easier to read the IO-Register content as the
 of any working register (r0-r31).
 The GPIORx register has no special function and can therefore used without any restriction.
 A additional use of this register by a application program is not prohibited.
-For AVR mikrocontrollers without this IO register group the counter register OCR2 is used.
+For AVR micro controllers without this IO register group the counter register OCR2 is used.
 
 
 I look forward for any replies to the "assembly language optiboot" subject.
