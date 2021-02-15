@@ -22,7 +22,9 @@ you will find a zip file for PCB manufacturing.
 
 ## Software
 
-### Install and prepare avrdude
+### Prerequisites
+
+#### Install and prepare avrdude
 
 >$ sudo apt install make binutils-avr avrdude avr-libc gcc-avr cross-avr-gcc9  
 >
