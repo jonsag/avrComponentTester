@@ -392,7 +392,7 @@ INHIBIT_SLEEP_MODE = 0
 PROGRAMMER=avrisp
 BitClock=1.0
 PORT=/dev/ttyUSB0
-AVRDUDE_BAUD = -b 9600
+AVRDUDE_BAUD = -b 19200
 # setting for USBasp
 #PROGRAMMER=usbasp
 #BitClock=20

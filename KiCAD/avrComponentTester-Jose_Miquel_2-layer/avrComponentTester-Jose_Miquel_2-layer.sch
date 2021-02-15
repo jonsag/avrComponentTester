@@ -1338,7 +1338,7 @@ Wire Wire Line
 Wire Wire Line
 	9050 4550 9050 5050
 Text GLabel 9050 4150 1    50   Input ~ 0
-SCK
+RST
 Text GLabel 8750 4150 1    50   Input ~ 0
 A0
 Text GLabel 8450 4150 1    50   Input ~ 0

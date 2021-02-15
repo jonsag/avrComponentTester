@@ -63,11 +63,11 @@ Now you got six new files:
 
 Burn bootloader  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -U flash:w:optiboot_atmega328p.hex:i -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i -v -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m
 
 (or  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U flash:w:optiboot_atmega328p.hex -U lock:w:0x0F:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:optiboot_atmega328p.hex -U lock:w:0x0F:m
 
 or  
 
@@ -100,7 +100,7 @@ and a directory with lots of files in:
 
 Upload software  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -U flash:w:mega328_color_kit.hex
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -D -U flash:w:mega328_color_kit.hex
 
 Alternative:  
 If you are using another programmer than Arduino as ISP you have to adapt the Makefile accordingly.  
@@ -150,11 +150,24 @@ Some avrdude switches:
 
 More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
 
-#### Erase avr flash memory  
+#### Erase avr flash memory
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -t
->
->avrdude> erase
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
+
+    avrdude: AVR device initialized and ready to accept instructions
+
+    Reading | ################################################## | 100% 0.08s
+
+    avrdude: Device signature = 0x1e950f (probably m328p)
+    avrdude> erase
+    >>> erase 
+    avrdude: erasing chip
+    avrdude> quit
+    >>> quit 
+
+    avrdude: safemode: Fuses OK (E:FD, H:DF, L:FF)
+
+    avrdude done.  Thank you.
 
 ## Misc notes
 
@@ -162,11 +175,11 @@ Don't pay this any attention
 
 Fuse bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
 
 Hex file and lock bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 9600 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
 
 -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
 
