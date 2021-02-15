@@ -44,11 +44,9 @@ You have to log out user to make new groups available.
 
 #### Bootloader
 
-Perhaps bootloader isn't needed for ATmega328?  
-
 Build bootloader  
 
->$ cd Bootloader/optiboot
+>$ cd \<PATH_TO>/Bootloader/optiboot
 >
 >$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0 LED_DATA_FLASH=1
 
@@ -63,17 +61,7 @@ Now you got six new files:
 
 Burn bootloader  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i -v -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m
-
-(or  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:optiboot_atmega328p.hex -U lock:w:0x0F:m
-
-or  
-
->$ avrdude -v -p atmega328p -c stk500v2 -P usb -U flash:w:optiboot_atmega328.hex:i -U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
-
-)  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i
 
 Clean up  
 
@@ -83,7 +71,7 @@ Clean up
 
 Compile software  
 
->$ cd Software/ATmega328p_with_st7735/mega328_color_kit
+>$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
 >
 >$ make
 
@@ -102,11 +90,16 @@ Upload software
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -D -U flash:w:mega328_color_kit.hex
 
-Alternative:  
+Set fuses  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lock:w:0xFF:m -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
+
+#### Alternative to bootlader and software upload
+
 If you are using another programmer than Arduino as ISP you have to adapt the Makefile accordingly.  
 
-Skip the above 'make' and 'avrdude ...', and instead do  
-
+>$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
+>
 >$ make upload make
 
 Write fuses  
@@ -168,41 +161,3 @@ More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).
     avrdude: safemode: Fuses OK (E:FD, H:DF, L:FF)
 
     avrdude done.  Thank you.
-
-## Misc notes
-
-Don't pay this any attention  
-
-Fuse bits  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
-
-Hex file and lock bits  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
-
--U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
-
-I tried to re-program a problematic GM328 that was not possible to calibrate.
-https://www.youtube.com/watch?v=JCP7oWG3D3w
-No matter what mega328_GM328 version I used from https://www.mikrocontroller.net/...
-I always get a white blank screen.  The fuses I used are: lfuse=0xF7 hfuse=0xD9 efuse=0xFF
-
-https://saturn.ffzg.hr/rot13/index.cgi?avr_component_tester
-avrdude -c usbasp -B 20 -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0x04:m
-
-https://github.com/blurpy/transistor-tester
-fuses_lo = 0xf7
-fuses_hi = 0xd9
-fuses_ext = 0xfc
-lock_byte = 0xff
-I use a TL866II Plus universal programmer together with the minipro open source software for Linux. See https://github.com/blurpy/minipro for more about how to use.
-With the chip in the programmer, just run these commands:
-Erase chip: minipro -p "ATMEGA328P@DIP28" -E
-Write eeprom: minipro -p "ATMEGA328P@DIP28" -c data -w ComponentTester.eep -e
-Write flash: minipro -p "ATMEGA328P@DIP28" -c code -w ComponentTester.hex -e
-Write fuses: minipro -p "ATMEGA328P@DIP28" -c config -w ComponentTester.cfg -e
-That should be it.
-
-$ make fuses-crystal
-avrdude -c avrispmkII -B 200  -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m

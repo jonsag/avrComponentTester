@@ -4,9 +4,9 @@
 
 Atmega_board_detector at [https://github.com/jonsag/ardAVRProgrammer](https://github.com/jonsag/ardAVRProgrammer).
 
-ATmega328P MCU  
+## ATmega328P MCU  
 
-## Empty chip
+### Empty chip
 
     Signature = 0x1E 0x95 0x0F  
     Processor = ATmega328P  
@@ -36,7 +36,7 @@ ATmega328P MCU
     ...  
     F0: 0xFF ...  
 
-## With bootloader from Arduino IDE
+### With bootloader from Arduino IDE
 
 Board: Arduino AVR Boards -> Arduino Duemilanove or Diecimila  
 Processor: ATmega328P  
@@ -165,13 +165,7 @@ Micro: ATmega328P @ 16MHz w/Arduino as ISP
     ...  
     F0: 0xFF ...  
 
-## Erase avr flash memory  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
->
->avrdude> erase
-
-## With bootloader from Bootloader/optiboot
+### With bootloader from Bootloader/optiboot
 
 Compile bootloader  
 
@@ -377,7 +371,7 @@ Board detector:
     ...  
     F0: 0xFF ...  
 
-## Erasing chip and uploading software
+### Erasing chip and uploading software
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
 >  
@@ -468,7 +462,7 @@ Checking with Board Detector:
     ...
     F0: 0xC4 ...
 
-## Erasing chip, burning bootloader and uploading software
+### Erasing chip, burning bootloader and uploading software
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
 >
@@ -523,8 +517,6 @@ Trying again with -D switch
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i
 >
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -D -U flash:w:mega328_color_kit.hex
->
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
 
 Checking with Board Detector:  
 
@@ -558,7 +550,7 @@ Checking with Board Detector:
 
 Now the bootloader stays  
 
-## Setting fuses
+### Setting fuses
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
 
@@ -592,7 +584,7 @@ Checking with Board Detector:
     ...
     F0: 0xC4 ...
 
-## Uploading with make
+### Uploading with make
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
 >
@@ -769,7 +761,7 @@ Checking with Board Detector:
     ...
     F0: 0xC4 ...
 
-## Erasing chip and uploading with just make upload make
+### Erasing chip and uploading with just make upload make
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
 >
@@ -805,4 +797,48 @@ Checking with Board Detector:
     ...
     F0: 0xC4 ...
 
-Fuses stay and has botloader.  
+Fuses stay and has bootloader.  
+
+## Erase avr flash memory  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
+>
+>avrdude> erase
+
+## Misc notes
+
+Don't pay this any attention  
+
+Fuse bits  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U efuse:w:0x05:m -U hfuse:w:0xD6:m -U lfuse:w:0xFF:m
+
+Hex file and lock bits  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e -U flash:w:hexfilename.hex -U lock:w:0x0F:m
+
+-U lock:w:0x0F:m -U lfuse:w:0xff:m -U hfuse:w:0xde:m -U efuse:w:0x05:m  
+
+I tried to re-program a problematic GM328 that was not possible to calibrate.
+https://www.youtube.com/watch?v=JCP7oWG3D3w
+No matter what mega328_GM328 version I used from https://www.mikrocontroller.net/...
+I always get a white blank screen.  The fuses I used are: lfuse=0xF7 hfuse=0xD9 efuse=0xFF
+
+https://saturn.ffzg.hr/rot13/index.cgi?avr_component_tester
+avrdude -c usbasp -B 20 -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0x04:m
+
+https://github.com/blurpy/transistor-tester
+fuses_lo = 0xf7
+fuses_hi = 0xd9
+fuses_ext = 0xfc
+lock_byte = 0xff
+I use a TL866II Plus universal programmer together with the minipro open source software for Linux. See https://github.com/blurpy/minipro for more about how to use.
+With the chip in the programmer, just run these commands:
+Erase chip: minipro -p "ATMEGA328P@DIP28" -E
+Write eeprom: minipro -p "ATMEGA328P@DIP28" -c data -w ComponentTester.eep -e
+Write flash: minipro -p "ATMEGA328P@DIP28" -c code -w ComponentTester.hex -e
+Write fuses: minipro -p "ATMEGA328P@DIP28" -c config -w ComponentTester.cfg -e
+That should be it.
+
+$ make fuses-crystal
+avrdude -c avrispmkII -B 200  -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
