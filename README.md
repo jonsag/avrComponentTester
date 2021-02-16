@@ -92,9 +92,13 @@ Upload software
 
 Set fuses  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lock:w:0xFF:m -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lock:w:0xFF:m -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
 
-#### Alternative to bootlader and software upload
+Clean up  
+
+>$ make clean
+
+#### Alternative to bootloader and software upload
 
 If you are using another programmer than Arduino as ISP you have to adapt the Makefile accordingly.  
 
@@ -114,9 +118,9 @@ Clean up
 
 ### Fuse bits
 
-Fuse bit calculator  
+Fuse bit calculator [here](https://www.engbedded.com/fusecalc/).  
 
-[https://www.engbedded.com/fusecalc/](https://www.engbedded.com/fusecalc/) 
+Some reading [here](https://embedds.com/all-you-need-to-know-about-avr-fuses/).  
 
 ### avrdude
 
@@ -141,9 +145,8 @@ Some avrdude switches:
         boot; the boot flash area of ATxmega devices
     -t ; enter the interactive “terminal” mode
 
-More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html),  
+More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
 
-and [here](https://embedds.com/all-you-need-to-know-about-avr-fuses/).  
 #### Erase avr flash memory
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e
@@ -184,4 +187,3 @@ Read fuse bits
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v hfuse:r:-:i
 >
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v efuse:r:-:i
-

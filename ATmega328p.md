@@ -373,7 +373,7 @@ Board detector:
 
 ### Erasing chip and uploading software
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e  
 >  
 >$ cd Software/ATmega328p_with_st7735/mega328_color_kit  
 >  
@@ -464,7 +464,7 @@ Checking with Board Detector:
 
 ### Erasing chip, burning bootloader and uploading software
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e  
 >
 >$ cd Bootloader/optiboot
 >
@@ -512,7 +512,7 @@ Evidently this erases the bootloader
 
 Trying again with -D switch  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e  
 >
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i
 >
@@ -552,7 +552,7 @@ Now the bootloader stays
 
 ### Setting fuses
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
 
 Checking with Board Detector:  
 
@@ -586,7 +586,7 @@ Checking with Board Detector:
 
 ### Uploading with make
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e  
 >
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i
 >
@@ -763,7 +763,7 @@ Checking with Board Detector:
 
 ### Erasing chip and uploading with just make upload make
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e  
 >
 >$ make upload make
 
@@ -804,6 +804,10 @@ Fuses stay and has bootloader.
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
 >
 >avrdude> erase
+
+or  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e
 
 ## Misc notes
 
