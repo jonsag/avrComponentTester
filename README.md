@@ -141,9 +141,14 @@ Some avrdude switches:
         boot; the boot flash area of ATxmega devices
     -t ; enter the interactive “terminal” mode
 
-More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).  
+More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html),  
 
+and [here](https://embedds.com/all-you-need-to-know-about-avr-fuses/).  
 #### Erase avr flash memory
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e
+
+or  
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
 
@@ -161,3 +166,22 @@ More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).
     avrdude: safemode: Fuses OK (E:FD, H:DF, L:FF)
 
     avrdude done.  Thank you.
+
+#### Read from MCU to file
+
+Read EEPROM  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:filename.hex:i  
+
+Read flash  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U eeprom:r:filename.hex:i  
+
+Read fuse bits  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v lfuse:r:-:i
+>
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v hfuse:r:-:i
+>
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v efuse:r:-:i
+
