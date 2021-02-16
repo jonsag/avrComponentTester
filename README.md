@@ -172,18 +172,18 @@ or
 
 #### Read from MCU to file
 
-Read EEPROM  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:filename.hex:i  
-
 Read flash  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U eeprom:r:filename.hex:i  
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:flash.hex:i  
+
+Read EEPROM  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U eeprom:r:eeprom.eep:i  
 
 Read fuse bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v lfuse:r:-:i
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:r:-:i
 >
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v hfuse:r:-:i
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U hfuse:r:-:i
 >
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v efuse:r:-:i
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U efuse:r:-:i

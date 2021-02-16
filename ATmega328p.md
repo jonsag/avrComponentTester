@@ -799,15 +799,15 @@ Checking with Board Detector:
 
 Fuses stay and has bootloader.  
 
-## Erase avr flash memory  
+## Erase avr flash memory 
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e
+
+or  
 
 >$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
 >
 >avrdude> erase
-
-or  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e
 
 ## Misc notes
 
@@ -846,3 +846,85 @@ That should be it.
 
 $ make fuses-crystal
 avrdude -c avrispmkII -B 200  -p m328p -P usb  -U lfuse:w:0xf7:m -U hfuse:w:0xd9:m -U efuse:w:0xfc:m
+
+/home/jon/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/bin/avrdude \
+-C/home/jon/.arduino15/packages/arduino/tools/avrdude/6.3.0-arduino17/etc/avrdude.conf \
+-v -patmega328p \
+-cstk500v1 \
+-P/dev/ttyUSB0 \
+-b19200 \
+-Uflash:w:/tmp/arduino_build_677961/st7735_demo.ino.hex:i
+
+>$ avrdude -v -patmega328p -cstk500v1 -P/dev/ttyUSB0 -b19200 -Uflash:w:
+
+### make upload make
+
+First erase chip  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e
+
+Compile and upload  
+
+>$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
+>
+>$ make upload make
+
+Commands run by this  
+
+>$ make
+>
+>$ avrdude -c avrisp -B 1.0 -b 19200 -p m328p -P /dev/ttyUSB0 -U flash:w:./mega328_color_kit.hex:a \
+>-U eeprom:w:./mega328_color_kit.eep:a
+
+Upload of EEPROM failed.  
+
+    avrdude: 876 bytes of eeprom written
+    avrdude: verifying eeprom memory against ./mega328_color_kit.eep:
+    avrdude: load data eeprom data from input file ./mega328_color_kit.eep:
+    avrdude: input file ./mega328_color_kit.eep auto detected as Intel Hex
+    avrdude: input file ./mega328_color_kit.eep contains 876 bytes
+    avrdude: reading on-chip eeprom data:
+
+    Reading | ################################################## | 100% 13.51s
+
+    avrdude: verifying ...
+    avrdude: verification error, first mismatch at byte 0x0000
+            0x20 != 0x49
+    avrdude: verification error; content mismatch
+
+My compiled version of the .eep file are identical with the precompiled in the svn,  
+and so is the .hex.  
+
+Trying a dump of the .hex and .eep  
+
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:flash.hex:i -U eeprom:r:eeprom.eep:i
+
+Running diffs  
+
+>$ diff mega328_color_kit.hex flash.hex | wc -l
+
+    3003
+
+>$ diff mega328_color_kit.eep eeprom.eep | wc -l
+
+    91
+
+Trying a new chip  
+
+>$ make clean
+>
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -e
+>
+>$ make upload make
+>
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:flash2.hex:i -U eeprom:r:eeprom2.eep:i
+>
+>$ diff mega328_color_kit.hex flash2.hex | wc -l
+
+    3003
+
+>$ diff mega328_color_kit.eep eeprom2.eep | wc -l
+
+    91
+
+>$ make fuses-crystal
