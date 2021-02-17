@@ -10,9 +10,10 @@ Adapted from project at [https://www.mikrocontroller.net/articles/AVR_Transistor
 
 ### Programmer
 
-You will need an avr programmer like [this one](https://github.com/jonsag/ardAVRProgrammer).  
+You will need an avr programmer like [this one](https://github.com/jonsag/USBaspProgrammer), or perhaps [this one](https://github.com/jonsag/ardAVRProgrammer).  
 
-If you use an another programmer you will have to adapt the avrdude -c switch in the commands below.  
+I'm using the first of these two.  
+If you use an another programmer you will have to adapt the avrdude -c switch in the commands below, and change some lines in the Makefile.  
 
 ### Components tester
 
@@ -42,37 +43,24 @@ You have to log out user to make new groups available.
 
 ### ATmega328P with ST7735 1.8" OLED screen
 
-#### Bootloader
+#### Tester software
 
-Build bootloader  
-
->$ cd \<PATH_TO>/Bootloader/optiboot
+>$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
 >
->$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0 LED_DATA_FLASH=1
+>$ make upload make
 
-Now you got six new files:  
+Write fuses  
 
-    baudcheck.tmp.sh
-    optiboot_atmega328p.hex
-    optiboot_atmega328p.log
-    optiboot/optiboot_atmega328p.lst
-    optiboot.elf
-    optiboot.o
-
-Burn bootloader  
-
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:w:optiboot_atmega328p.hex:i
+>$ make fuses-crystal
 
 Clean up  
 
 >$ make clean
 
-#### Tester software
+#### Alternative method
 
 Compile software  
 
->$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
->
 >$ make
 
 This creates four new files:  
@@ -86,29 +74,13 @@ and a directory with lots of files in:
 
     ../Obj/
 
-Upload software  
+Upload software and EEPROM
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -D -U flash:w:mega328_color_kit.hex
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -U flash:w:mega328_color_kit.hex -U eeprom:w:mega328_color_kit.eep
 
 Set fuses  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lock:w:0xFF:m -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
-
-Clean up  
-
->$ make clean
-
-#### Alternative to bootloader and software upload
-
-If you are using another programmer than Arduino as ISP you have to adapt the Makefile accordingly.  
-
->$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
->
->$ make upload make
-
-Write fuses  
-
->$ make fuses-crystal
+>$ avrdude -p m328p -P -P usb -c usbasp -B 20 -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
 
 Clean up  
 
@@ -182,8 +154,29 @@ Read EEPROM
 
 Read fuse bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:r:-:i
+>$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:r:-:i -U hfuse:r:-:i -U efuse:r:-:i
+
+#### Bootloader
+
+Build bootloader  
+
+>$ cd \<PATH_TO>/Bootloader/optiboot
 >
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U hfuse:r:-:i
->
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U efuse:r:-:i
+>$ make atmega328p AVR_FREQ=8000000 BAUD_RATE=9600 LED_START_FLASHES=0 LED_DATA_FLASH=1
+
+Now you got six new files:  
+
+    baudcheck.tmp.sh
+    optiboot_atmega328p.hex
+    optiboot_atmega328p.log
+    optiboot/optiboot_atmega328p.lst
+    optiboot.elf
+    optiboot.o
+
+Burn bootloader  
+
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -U flash:w:optiboot_atmega328p.hex:i
+
+Clean up  
+
+>$ make clean
