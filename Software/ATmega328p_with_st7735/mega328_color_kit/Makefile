@@ -389,14 +389,14 @@ INHIBIT_SLEEP_MODE = 0
 #BitClock=1.0
 #PORT=usb
 # setting for Arduino as ISP, atmega328p
-PROGRAMMER=avrisp
-BitClock=1.0
-PORT=/dev/ttyUSB0
-AVRDUDE_BAUD = -b 19200
+#PROGRAMMER=avrisp
+#BitClock=1.0
+#PORT=/dev/ttyUSB0
+#AVRDUDE_BAUD = -b 19200
 # setting for USBasp
-#PROGRAMMER=usbasp
-#BitClock=20
-#PORT=usb
+PROGRAMMER=usbasp
+BitClock=20
+PORT=usb
 # setting for ARDUINO MEGA, requires bootloader
 #PROGRAMMER=wiring
 #PORT = /dev/ttyACM0
