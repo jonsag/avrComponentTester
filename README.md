@@ -80,7 +80,7 @@ Upload software and EEPROM
 
 Set fuses  
 
->$ avrdude -p m328p -P -P usb -c usbasp -B 20 -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -U lfuse:w:0xF7:m -U hfuse:w:0xD9:m -U efuse:w:0xFC:m
 
 Clean up  
 
@@ -121,11 +121,11 @@ More on [this page](https://www.nongnu.org/avrdude/user-manual/avrdude_4.html).
 
 #### Erase avr flash memory
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -e
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -e
 
 or  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -t
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -t
 
     avrdude: AVR device initialized and ready to accept instructions
 
@@ -146,15 +146,15 @@ or
 
 Read flash  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U flash:r:flash.hex:i  
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -U flash:r:flash.hex:i  
 
 Read EEPROM  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -v -U eeprom:r:eeprom.eep:i  
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -v -U eeprom:r:eeprom.eep:i  
 
 Read fuse bits  
 
->$ avrdude -p m328p -P /dev/ttyUSB0 -c avrisp -b 19200 -U lfuse:r:-:i -U hfuse:r:-:i -U efuse:r:-:i
+>$ avrdude -p m328p -P usb -c usbasp -B 20 -U lfuse:r:-:i -U hfuse:r:-:i -U efuse:r:-:i
 
 #### Bootloader
 
