@@ -555,7 +555,7 @@ U 1 1 6033D386
 P 1950 3050
 F 0 "Q3" H 2141 3004 50  0000 L CNN
 F 1 "2N3906" H 2141 3095 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 2150 2975 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 2150 2975 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3906-D.PDF" H 1950 3050 50  0001 L CNN
 	1    1950 3050
 	-1   0    0    1   
@@ -774,7 +774,7 @@ U 1 1 603BACF4
 P 3700 3950
 F 0 "Q1" H 3891 3996 50  0000 L CNN
 F 1 "2N3904" H 3891 3905 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 3900 3875 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 3900 3875 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 3700 3950 50  0001 L CNN
 	1    3700 3950
 	-1   0    0    -1  
@@ -839,7 +839,7 @@ U 1 1 604E88A2
 P 4000 2700
 F 0 "Q2" H 4190 2746 50  0000 L CNN
 F 1 "2N3904" H 4190 2655 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 4200 2625 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 4200 2625 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 4000 2700 50  0001 L CNN
 	1    4000 2700
 	1    0    0    -1  
@@ -989,7 +989,7 @@ U 1 1 606104A1
 P 4900 2000
 F 0 "C1" V 4648 2000 50  0000 C CNN
 F 1 "1n" V 4739 2000 50  0000 C CNN
-F 2 "My_Misc:C_Disc_D3.0mm_W1.6mm_P7.68mm_large" H 4938 1850 50  0001 C CNN
+F 2 "My_Misc:C_Disc_D3.0mm_W1.6mm_P2.50mm_larg" H 4938 1850 50  0001 C CNN
 F 3 "~" H 4900 2000 50  0001 C CNN
 	1    4900 2000
 	0    1    1    0   
@@ -1036,7 +1036,7 @@ U 1 1 60682CC5
 P 6150 1150
 F 0 "C3" H 6265 1196 50  0000 L CNN
 F 1 "100n" H 6265 1105 50  0000 L CNN
-F 2 "My_Misc:C_Disc_D3.0mm_W1.6mm_P7.68mm_large" H 6188 1000 50  0001 C CNN
+F 2 "My_Misc:C_Disc_D3.0mm_W1.6mm_P2.50mm_larg" H 6188 1000 50  0001 C CNN
 F 3 "~" H 6150 1150 50  0001 C CNN
 	1    6150 1150
 	1    0    0    -1  
@@ -1305,7 +1305,7 @@ U 1 1 609F6165
 P 8450 4400
 F 0 "R22" H 8520 4446 50  0000 L CNN
 F 1 "10k" H 8520 4355 50  0000 L CNN
-F 2 "My_Misc:R_Axial_DIN0207_L6.3mm_D2.5mm_P20.32mm_Horizontal_larger_pads" V 8380 4400 50  0001 C CNN
+F 2 "My_Misc:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal_larger_pads" V 8380 4400 50  0001 C CNN
 F 3 "~" H 8450 4400 50  0001 C CNN
 	1    8450 4400
 	1    0    0    -1  
@@ -1507,7 +1507,7 @@ U 1 1 60F0F960
 P 2250 3800
 F 0 "UC1" H 2250 4042 50  0000 C CNN
 F 1 "L78L05_TO92" H 2250 3951 50  0000 C CNN
-F 2 "My_Misc:TO-92_Inline_large" H 2250 4025 50  0001 C CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 2250 4025 50  0001 C CIN
 F 3 "http://www.st.com/content/ccc/resource/technical/document/datasheet/15/55/e5/aa/23/5b/43/fd/CD00000446.pdf/files/CD00000446.pdf/jcr:content/translations/en.CD00000446.pdf" H 2250 3750 50  0001 C CNN
 	1    2250 3800
 	1    0    0    -1  
@@ -1518,7 +1518,7 @@ U 1 1 60F5A224
 P 7800 3500
 F 0 "UR1" V 7846 3430 50  0000 R CNN
 F 1 "TL431LP" V 7755 3430 50  0000 R CNN
-F 2 "My_Misc:TO-92_Inline_large" H 7800 3350 50  0001 C CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 7800 3350 50  0001 C CIN
 F 3 "http://www.ti.com/lit/ds/symlink/tl431.pdf" H 7800 3500 50  0001 C CIN
 	1    7800 3500
 	0    -1   -1   0   
