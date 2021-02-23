@@ -1599,4 +1599,11 @@ Wire Wire Line
 	10500 6100 10400 6100
 Text Notes 10200 6300 0    50   ~ 0
 SMD test pad
+NoConn ~ 1150 2750
+NoConn ~ 11000 4950
+NoConn ~ 11000 5050
+NoConn ~ 11000 5150
+NoConn ~ 11000 5250
+NoConn ~ 6350 4200
+NoConn ~ 2650 6650
 $EndSCHEMATC
