@@ -59,7 +59,7 @@ CFLAGS += -DWITH_MENU
 # You must set the WITH_ROTARY_SWITCH to 4 for the UP/DOWN push-buttons.
 CFLAGS += -DWITH_ROTARY_SWITCH=2
 # the option CHANGE_ROTARY_DIRECTION changes the rotary direction by swap of switches
-#CFLAGS += -DCHANGE_ROTARY_DIRECTION
+CFLAGS += -DCHANGE_ROTARY_DIRECTION
 # The best solution for connecting the rotary switch is PD1 and PD3, because this setting can be used
 # with character and ST7565 LCD. But the first draft has used PD2 instead of PD1.
 # To return to the old setting, you can override the PD1 default setting with the following setting:

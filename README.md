@@ -43,11 +43,29 @@ You have to log out user to make new groups available.
 
 ### ATmega328P with ST7735 1.8" OLED screen
 
+#### Adapt software
+
+In Makefile, uncomment line 62 to change direction of the rotary encoder  
+
+    CFLAGS += -DCHANGE_ROTARY_DIRECTION
+
+In autoconf.h, lines 169 and 172:  
+
+    #define R_L_VAL 6800
+    ...
+    #define R_H_VAL 47000
+
+Set values to match your resistors, ie:  
+
+    #define R_L_VAL 6790
+    ...
+    #define R_H_VAL 46900
+
 #### Tester software
 
 >$ cd \<PATH_TO>/Software/ATmega328p_with_st7735/mega328_color_kit
 >
->$ make upload make
+>$ make upload
 
 Write fuses  
 
