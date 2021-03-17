@@ -555,7 +555,7 @@ U 1 1 6033D386
 P 1950 3050
 F 0 "Q3" H 2141 3004 50  0000 L CNN
 F 1 "2N3906" H 2141 3095 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 2150 2975 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 2150 2975 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3906-D.PDF" H 1950 3050 50  0001 L CNN
 	1    1950 3050
 	-1   0    0    1   
@@ -774,7 +774,7 @@ U 1 1 603BACF4
 P 3700 3950
 F 0 "Q1" H 3891 3996 50  0000 L CNN
 F 1 "2N3904" H 3891 3905 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 3900 3875 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 3900 3875 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 3700 3950 50  0001 L CNN
 	1    3700 3950
 	-1   0    0    -1  
@@ -839,7 +839,7 @@ U 1 1 604E88A2
 P 4000 2700
 F 0 "Q2" H 4190 2746 50  0000 L CNN
 F 1 "2N3904" H 4190 2655 50  0000 L CNN
-F 2 "My_Misc:TO-92_Inline_large" H 4200 2625 50  0001 L CIN
+F 2 "My_Misc:TO-92_Inline_Wide_large" H 4200 2625 50  0001 L CIN
 F 3 "https://www.onsemi.com/pub/Collateral/2N3903-D.PDF" H 4000 2700 50  0001 L CNN
 	1    4000 2700
 	1    0    0    -1  
