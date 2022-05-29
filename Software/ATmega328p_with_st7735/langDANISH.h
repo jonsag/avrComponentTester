@@ -51,7 +51,7 @@
    const unsigned char TURN_str[] MEM2_TEXT = "drej!";
    const unsigned char FULLCHECK_str[] MEM2_TEXT = "Selvtest";
    const unsigned char SHORT_PROBES_str[] MEM2_TEXT = "Forbind pinde!";
-  #if PROCESSOR_TYP == 644
+  #if (WITH_FREQUENCY_SWITCH == 1)
    const unsigned char HFREQ_str[] MEM2_TEXT = "Frekvens > 2MHz";
    const unsigned char H_CRYSTAL_str[] MEM2_TEXT = "HF-krystal";
    const unsigned char L_CRYSTAL_str[] MEM2_TEXT = "LF-krystal";
@@ -112,11 +112,10 @@
 'S','o','f','t','w','a','r','e',' ','o','g',' ',
 
 'd','o','k','u','m','e','n','t','a','t','i','o','n',' ',
-'e','r',' ','p',a_ring,' ','s','v','n',':','/','/',' ',
-
-'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r','.',' ',
-'n','e','t','/','t','r','a','n','s','i','s','t','o','r',' ',
-
+'e','r',' ','p',a_ring,' ',
+'g','i','t','h','u','b','.','c','o','m','/',LCD_NO_SPACE,
+'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r',LCD_NO_SPACE,
+'-','n','e','t','/','t','r','a','n','s','i','s','t','o','r',LCD_NO_SPACE,
 't','e','s','t','e','r',' '
   #endif   /* SHORT_UNCAL_MSG */
 ,0};

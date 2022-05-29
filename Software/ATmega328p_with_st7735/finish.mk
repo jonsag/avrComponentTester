@@ -111,9 +111,10 @@ $(OBJDIR)/samplingADC.o: ../samplingADC.S $(MKFILES)
 deleteobj:
 	rm -rf $(OBJDIR)
 # create directories
-directories: deleteobj
-	mkdir $(OBJDIR)
-	mkdir $(DEPDIR)
+objdirect: deleteobj
+	mkdir -p $(OBJDIR)
+directories: objdirect
+	mkdir -p $(DEPDIR)
 
 OBJFILES = $(addprefix $(OBJDIR)/, $(OBJECTS))
 
@@ -135,6 +136,7 @@ size: ${TARGET}
 	@echo
 	@echo $(OP_MHZ) MHz operation configured.
 	@$(AVR_TOOL/PATH)avr-size -C --mcu=${MCU} ${TARGET}
+	@rm -rf $(OBJDIR)
 
 ## Clean target
 .PHONY: directories size clean steril fuses fuses-crystal fuses-crystal-lp erase upload program flash eeprom eeread read verify upload_orig
@@ -195,4 +197,6 @@ verify:
 upload_orig:
 	avrdude -c $(PROGRAMMER) -B $(BitClock) $(AVRDUDE_BAUD) -p $(PARTNO) -P $(PORT) -U flash:w:./TransistorTestorig.hex:a \
 	-U eeprom:w:./TransistorTestorig.eep:a
+if:
+	ls -l /dev/serial/by-id/* | cut -c 40-
 ## ****************************** EOF ***************************************** ##

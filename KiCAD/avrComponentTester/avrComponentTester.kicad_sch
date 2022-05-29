@@ -3030,7 +3030,7 @@
     (property "Value" "ATmega328P-PU" (id 1) (at 129.6924 82.423 0)
       (effects (font (size 1.27 1.27)) (justify right))
     )
-    (property "Footprint" "Package_DIP:DIP-28_W7.62mm" (id 2) (at 146.05 81.28 0)
+    (property "Footprint" "My_Misc:DIP-28_W7.62mm_LongPads w socket" (id 2) (at 146.05 81.28 0)
       (effects (font (size 1.27 1.27) italic) hide)
     )
     (property "Datasheet" "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" (id 3) (at 146.05 81.28 0)
@@ -3050,8 +3050,8 @@
     (pin "2" (uuid 62f98874-c086-4016-aff0-1f354a411a35))
     (pin "20" (uuid 1f9f75f5-5cf2-496c-93a3-86927ceb525f))
     (pin "21" (uuid ddbcb7d1-6ff4-48c2-884d-9a3d4941e698))
-    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead7))
-    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead7))
+    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead8))
+    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead8))
     (pin "23" (uuid 1f830867-4f5f-4345-b1b0-4c368291f0c9))
     (pin "24" (uuid 7c45bca8-feee-4032-a521-4b75bcecce50))
     (pin "25" (uuid f686aee0-011d-49d4-b9f1-91a248d4901a))
@@ -4953,7 +4953,7 @@
       (reference "U1") (unit 1) (value "ST7735_1.8\"_TFT_128x160") (footprint "My_Parts:ST7735_1.8_TFT_display_128x160_large")
     )
     (path "/00000000-0000-0000-0000-00006027c604"
-      (reference "U2") (unit 1) (value "ATmega328P-PU") (footprint "Package_DIP:DIP-28_W7.62mm")
+      (reference "U2") (unit 1) (value "ATmega328P-PU") (footprint "My_Misc:DIP-28_W7.62mm_LongPads w socket")
     )
     (path "/00000000-0000-0000-0000-000060f0f960"
       (reference "UC1") (unit 1) (value "L78L05_TO92") (footprint "Package_TO_SOT_THT:TO-92_Inline_Wide")

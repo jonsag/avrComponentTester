@@ -90,6 +90,9 @@
  // if line length is not specified otherwise, use 16 characters
  #define LCD_LINE_LENGTH 16
 #endif
+//#if (LCD_LINE_LENGTH + 0) < 16
+// #warning "Your screen can show less then 16 characters in a line! Probably a smaller font can help."
+//#endif
 
 #if (defined(WITH_GRAPHICS) && (((SCREEN_WIDTH-(TEXT_RIGHT_TO_ICON*FONT_H_SPACE))/FONT_H_SPACE) < 9))
  #define LOW_H_SPACE 1
@@ -465,7 +468,7 @@
 #else
  // use sleep mode to save current for user interface
  #define wait_about5ms() sleep_5ms(1)
- #define wait_about10ms() sleep_5ms(2)
+ #define wait_about10ms() sleep_10ms()
  #define wait_about20ms() sleep_5ms(4)
  #define wait_about30ms() sleep_5ms(6)
  #define wait_about50ms() sleep_5ms(10)
@@ -536,30 +539,31 @@
 //self build characters 
 #define LCD_CHAR_DIODE1  1      //Diode-Icon; will be generated as custom character
 #define LCD_CHAR_DIODE2  2      //Diode-Icon;  will be generated as custom character
-#define LCD_CHAR_CAP 4          //Capacitor-Icon;  will be generated as custom character
+#define LCD_CHAR_CAP 3          //Capacitor-Icon;  will be generated as custom character
         // numbers of RESIS1 and RESIS2 are swapped for OLED display, which shows a corrupt RESIS1 character otherwise ???
-#define LCD_CHAR_RESIS1 6       // Resistor left part will be generated as custom character
-#define LCD_CHAR_RESIS2 7       // Resistor right part will be generated as custom character
+#define LCD_CHAR_RESIS1 4       // Resistor left part will be generated as custom character
+#define LCD_CHAR_RESIS2 5       // Resistor right part will be generated as custom character
 
 
 #ifdef LCD_CYRILLIC
-        #define LCD_CHAR_OMEGA  3       //Omega-character 
-        #define LCD_CHAR_U  5           //mu-character
+        #define LCD_CHAR_OMEGA  7       // Omega-character cyrillic LCD
+        #define LCD_CHAR_U  6           // mu-character cyrillic LCD
 #else
-        #define LCD_CHAR_OMEGA  244     //Omega-character
-        #define LCD_CHAR_U  228         //mu-character
+        #define LCD_CHAR_OMEGA  244     // Omega-character standard LCD
+        #define LCD_CHAR_U  228         // mu-character standard LCD
 #endif
 
 #ifdef LCD_DOGM
 	#undef LCD_CHAR_OMEGA
 	#define LCD_CHAR_OMEGA 0x1e	//Omega-character for DOGM module
         #undef LCD_CHAR_U
-        #define LCD_CHAR_U  5           //mu-character for DOGM module loadable
+        #define LCD_CHAR_U  6           //mu-character for DOGM module loadable
 #endif
 
 
 #define LCD_CHAR_DEGREE 0xdf            // Character for degree
 #define LCD_CHAR_INSEP 0xff		// used as space character without separating text
+#define LCD_NO_SPACE 0xfe               // used to separate text without space
 #define LCD_CHAR_LINE1 '-'		// usually the minus sign is used for line symbol
 #define LCD_CHAR_INDUCTOR1 'w'		// use ww for inductor symbol
 #define LCD_CHAR_INDUCTOR2 'w'		// use ww for inductor symbol
@@ -567,18 +571,25 @@
 #if (defined(WITH_GRAPHICS) || defined(LCD_USE_OWN_FONT))
 // redefine the special symbols for software character set used with graphical display
         #undef LCD_CHAR_DEGREE
-        #define LCD_CHAR_DEGREE 0xf8	// Character for degree
         #undef LCD_CHAR_OMEGA
-        #define LCD_CHAR_OMEGA  13       //Omega-character 
         #undef LCD_CHAR_U
-        #define LCD_CHAR_U  14		//\B5-character
         #undef LCD_CHAR_LINE1
-        #define LCD_CHAR_LINE1  8	// line is specified as long -
+        #define LCD_CHAR_LINE1  6	// line is specified as long -
         #undef LCD_CHAR_INDUCTOR1
-        #define LCD_CHAR_INDUCTOR1  9		//begin of coil
+        #define LCD_CHAR_INDUCTOR1  7		//begin of coil
         #undef LCD_CHAR_INDUCTOR2
-        #define LCD_CHAR_INDUCTOR2  10		//end of coil
+        #define LCD_CHAR_INDUCTOR2  8		//end of coil
+ #if (defined WITH_GRAPHICS)
+	#define LCD_CHAR_DEGREE 0x1f
+	#define LCD_CHAR_U	0x1e		// mu character for graphic display
+	#define LCD_CHAR_OMEGA	0x1d		// Omega character for graphic display
+	#define LCD_CHAR_BETA	0x1c		// Beta character for graphic display
+ #else
+        #define LCD_CHAR_DEGREE 0xf8	// Character for degree
+        #define LCD_CHAR_OMEGA  13       //Omega-character 
+        #define LCD_CHAR_U  14		//\B5-character
 	#define LCD_CHAR_BETA 12
+ #endif
 #endif 
 
 
@@ -763,7 +774,7 @@
 #ifndef TP_OFFSET
  #define TP_OFFSET 0
 #endif
-#if  !defined(LCD_INTERFACE_MODE)  || (LCD_INTERFACE_MODE == MODE_PARALLEL)
+#if  !defined(LCD_INTERFACE_MODE)  || (LCD_INTERFACE_MODE == MODE_PARALLEL) || (LCD_INTERFACE_MODE == MODE_I2C) || (LCD_INTERFACE_MODE == MODE_I2C_CHAR)
  #define MODE_8BIT 0x00         /* 4-bit Mode */
 #else
  #define MODE_8BIT 0x10
@@ -860,17 +871,20 @@
  #define USE_HFREQ 0
  #define USE_H_CRYSTAL 0
  #define USE_L_CRYSTAL 0
+ #define NO_FREQUENCY_SWITCH 0
 #else   /* with frequency counter */
- #if PROCESSOR_TYP == 644
+ #if (PROCESSOR_TYP == 644) && (NO_FREQUENCY_SWITCH != 1)
   #define USE_FREQ 1
   #define USE_HFREQ 1
   #define USE_H_CRYSTAL 1
   #define USE_L_CRYSTAL 1
+  #define WITH_FREQUENCY_SWITCH 1
  #else
   #define USE_FREQ 1
   #define USE_HFREQ 0
   #define USE_H_CRYSTAL 0
   #define USE_L_CRYSTAL 0
+  #define WITH_FREQUENCY_SWITCH 0
  #endif
 #endif
 
@@ -887,7 +901,7 @@
 
 #define USE_BIG_CAP_CORR 1
 
-#ifdef MODE_ROTARY
+#ifdef WITH_ROTARY_CHECK
  #define USE_ROTARY 1
 #else
  #define USE_ROTARY 0

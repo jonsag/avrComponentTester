@@ -51,7 +51,7 @@
    const unsigned char TURN_str[] MEM2_TEXT = "draaien!";
    const unsigned char FULLCHECK_str[] MEM2_TEXT = "Zelftest";
    const unsigned char SHORT_PROBES_str[] MEM2_TEXT = "Verbind pinnen!";
-  #if PROCESSOR_TYP == 644
+  #if (WITH_FREQUENCY_SWITCH == 1)
    const unsigned char HFREQ_str[] MEM2_TEXT = "Frequentie > 2MHz";
    const unsigned char H_CRYSTAL_str[] MEM2_TEXT = "HF-kristal";
    const unsigned char L_CRYSTAL_str[] MEM2_TEXT = "LF-kristal";
@@ -112,11 +112,10 @@
 'S','o','f','t','w','a','r','e',' ','e','n',' ',
 
 'd','o','c','u','m','e','n','t','a','t','i','e',' ',
-'s','t','a','a','t',' ','o','p',' ','s','v','n',':','/','/',' ',
-
-'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r','.',' ',
-'n','e','t','/','t','r','a','n','s','i','s','t','o','r',' ',
-
+'s','t','a','a','t',' ','o','p',' ',
+'g','i','t','h','u','b','.','c','o','m','/',LCD_NO_SPACE,
+'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r',LCD_NO_SPACE,
+'-','n','e','t','/','t','r','a','n','s','i','s','t','o','r',LCD_NO_SPACE,
 't','e','s','t','e','r',' '
   #endif   /* SHORT_UNCAL_MSG */
 ,0};

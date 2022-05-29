@@ -20,10 +20,10 @@
    const unsigned char Unknown[] MEM_TEXT = "ismeretlen";
    const unsigned char TestFailed1[] MEM_TEXT = "hibas vagy";
    const unsigned char Detected[] MEM_TEXT = {e_acute,'s','z','l','e','l','t',e_acute,'k',0};
-   const unsigned char TestTimedOut[] MEM_TEXT = {'a','z',LCD_CHAR_INSEP,'i','d',o_doubleAcute,LCD_CHAR_INSEP,'l','e','j',a_acute,'r','t',0};
+   const unsigned char TestTimedOut[] MEM_TEXT = {'a','z',LCD_CHAR_INSEP,'i','d',o_dblac,LCD_CHAR_INSEP,'l','e','j',a_acute,'r','t',0};
    #define Cathode_char 'C'
  #ifdef WITH_SELFTEST
-   const unsigned char SELFTEST[] MEM_TEXT = {O_doubleAcute,'n','t','e','s','z','t',0};
+   const unsigned char SELFTEST[] MEM_TEXT = {O_dblac,'n','t','e','s','z','t',0};
    const unsigned char RELPROBE[] MEM_TEXT = "Rovidzar ki!"; // or "separate pins!";
    const unsigned char ATE[] MEM_TEXT = {'A',LCD_CHAR_INSEP,'t','e','s','z','t',LCD_CHAR_INSEP,'v',e_acute,'g','e',0};
  #endif
@@ -52,7 +52,7 @@
    const unsigned char TURN_str[] MEM2_TEXT = "forgat!";
    const unsigned char FULLCHECK_str[] MEM2_TEXT = "On-teszt mod";
    const unsigned char SHORT_PROBES_str[] MEM2_TEXT = "Csatlakoztassa a csapokat!";
-  #if PROCESSOR_TYP == 644
+  #if (WITH_FREQUENCY_SWITCH == 1)
    const unsigned char HFREQ_str[] MEM2_TEXT = "Frekvencia > 2MHz";
    const unsigned char H_CRYSTAL_str[] MEM2_TEXT = "HF Quarz";
    const unsigned char L_CRYSTAL_str[] MEM2_TEXT = "LF Quarz";
@@ -112,13 +112,10 @@
 '"','1',LCD_CHAR_LINE1,LCD_CHAR_CAP,LCD_CHAR_LINE1,'3',LCD_CHAR_INSEP,'>','1','0','0','n','F','"',' ',
 
 'A',LCD_CHAR_INSEP,'s','z','o','f','t','v','e','r',LCD_CHAR_INSEP,e_acute,'s',' ','a',' ',
-'d','o','k','u','m','e','n','t',a_acute,'c','i','o',' ',
-
-'a','z',' ','s','v','n',':','/','/',' ',
-
-'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r','.',' ',
-
-'n','e','t','/','t','r','a','n','s','i','s','t','o','r',' ',
+'d','o','k','u','m','e','n','t',a_acute,'c','i','o',' ','a','z',' ',
+'g','i','t','h','u','b','.','c','o','m','/',LCD_NO_SPACE,
+'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r',LCD_NO_SPACE,
+'-','n','e','t','/','t','r','a','n','s','i','s','t','o','r',LCD_NO_SPACE,
 't','e','s','t','e','r',' '
   #endif  /* SHORT_UNCAL_MSG */
 ,0};

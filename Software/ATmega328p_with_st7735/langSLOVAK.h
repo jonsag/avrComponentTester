@@ -53,7 +53,7 @@
       const unsigned char TURN_str[] MEM2_TEXT = {'K','r','u',t_caron,'!'};    
    const unsigned char FULLCHECK_str[] MEM2_TEXT = "Plna_a kalibracia";	//"Samotestovanie";
    const unsigned char SHORT_PROBES_str[] MEM2_TEXT = "Prepoj sondy!";
-  #if PROCESSOR_TYP == 644
+  #if (WITH_FREQUENCY_SWITCH == 1)
    const unsigned char HFREQ_str[] MEM2_TEXT = "Frekvencia > 2MHz";
    const unsigned char H_CRYSTAL_str[] MEM2_TEXT = "HF krystal";
    const unsigned char L_CRYSTAL_str[] MEM2_TEXT = "LF krystal";
@@ -102,10 +102,10 @@
 
 'S','o','f','t','w','a','r','e',' ','a',' ',
 d_caron,'o','k','u','m','e','n','t','a','c','i','a',' ','j','e',' ','n','a',' ',
-
-'s','v','n',':','/','/','m','i','k','r','o','c','o','n','t','r','o','l','l','e','r','.','n','e','t',
-
-'/','t','r','a','n','s','i','s','t','o','r',LCD_CHAR_INSEP,'t','e','s','t','e','r',' '
+'g','i','t','h','u','b','.','c','o','m','/',LCD_NO_SPACE,
+'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r',LCD_NO_SPACE,
+'-','n','e','t','/','t','r','a','n','s','i','s','t','o','r',LCD_NO_SPACE,
+'t','e','s','t','e','r',' '
   #endif  /* SHORT_UNCAL_MSG */
 ,0};
  #define HelpTXT

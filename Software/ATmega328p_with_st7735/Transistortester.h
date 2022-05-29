@@ -188,13 +188,13 @@ End of configuration
    const unsigned char TURN_str[] MEM2_TEXT = "turn!";	
    const unsigned char FULLCHECK_str[] MEM2_TEXT = "Selftest";
    const unsigned char SHORT_PROBES_str[] MEM2_TEXT = "short Probes!";
-#ifndef NO_FREQ_COUNTER
+  #ifndef NO_FREQ_COUNTER
    const unsigned char FREQ_str[] MEM2_TEXT = "Frequency";
- #ifdef WITH_FREQUENCY_DIVIDER
+   #ifdef WITH_FREQUENCY_DIVIDER
    const unsigned char FScaler_str[] MEM2_TEXT = "F-Scaler";
- #endif
-#endif
-  #if PROCESSOR_TYP == 644
+   #endif
+  #endif
+  #if (WITH_FREQUENCY_SWITCH == 1)
    const unsigned char HFREQ_str[] MEM2_TEXT = "Frequency > 2MHz";
    const unsigned char H_CRYSTAL_str[] MEM2_TEXT = "HF quartz";
    const unsigned char L_CRYSTAL_str[] MEM2_TEXT = "LF quartz";
@@ -286,6 +286,7 @@ End of configuration
 // Complete words are output to the LCD rows.
 // Words are separated by ' '. If you don't allow to separate two words
 // to different rows, you can hide the ' ' with LCD_CHAR_INSEP.
+// You can separate the text line also with LCD_NO_SPACE.
 // Notice, that the LCD has only 16 character in each line!
  #ifndef HelpTXT
  //default language english
@@ -334,11 +335,11 @@ End of configuration
 'S','o','f','t','w','a','r','e',' ','a','n','d',' ',
 
 'd','o','c','u','m','e','n','t','a','t','i','o','n',' ',
-'i','s',' ','a','t',' ','s','v','n',':','/','/',' ',
+'i','s',' ','a','t',' ','g','i','t','h','u','b','.','c','o','m','/',LCD_NO_SPACE,
 
-'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r','.',' ',
+'m','i','k','r','o','c','o','n','t','r','o','l','l','e','r',LCD_NO_SPACE,
 
-'n','e','t','/','t','r','a','n','s','i','s','t','o','r',' ',
+'-','n','e','t','/','t','r','a','n','s','i','s','t','o','r',LCD_NO_SPACE,
 't','e','s','t','e','r',' '
   #endif  /* SHORT_UNCAL_MSG */
 ,0};
