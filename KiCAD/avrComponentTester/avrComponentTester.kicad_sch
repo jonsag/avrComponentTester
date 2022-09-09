@@ -4,6 +4,12 @@
 
   (paper "A4")
 
+  (title_block
+    (title "avrComponentTester")
+    (date "2022-09-09")
+    (rev "0.5")
+  )
+
   (lib_symbols
     (symbol "Connector:Barrel_Jack_Switch" (pin_names hide) (in_bom yes) (on_board yes)
       (property "Reference" "J" (id 0) (at 0 5.334 0)
@@ -3050,8 +3056,8 @@
     (pin "2" (uuid 62f98874-c086-4016-aff0-1f354a411a35))
     (pin "20" (uuid 1f9f75f5-5cf2-496c-93a3-86927ceb525f))
     (pin "21" (uuid ddbcb7d1-6ff4-48c2-884d-9a3d4941e698))
-    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead8))
-    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead8))
+    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead9))
+    (pin "22" (uuid ca02bd56-8d0b-4e25-a8cf-ae1e1e49ead9))
     (pin "23" (uuid 1f830867-4f5f-4345-b1b0-4c368291f0c9))
     (pin "24" (uuid 7c45bca8-feee-4032-a521-4b75bcecce50))
     (pin "25" (uuid f686aee0-011d-49d4-b9f1-91a248d4901a))

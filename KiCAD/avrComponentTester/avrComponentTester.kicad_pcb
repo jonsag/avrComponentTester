@@ -5,6 +5,12 @@
   )
 
   (paper "A4")
+  (title_block
+    (title "avrComponentTester")
+    (date "2022-09-09")
+    (rev "0.5")
+  )
+
   (layers
     (0 "F.Cu" signal)
     (31 "B.Cu" signal)
@@ -3552,7 +3558,7 @@
   (gr_text "Freq Gen" (at 200.025 90.805 90) (layer "F.SilkS") (tstamp 41daf2ee-bc90-4b0e-88ad-8070ecac6d6a)
     (effects (font (size 1 1) (thickness 0.15)))
   )
-  (gr_text "avrComponentTester 0.5\nDesign: Jon Sagebrand\ngithub.com/jonsag" (at 167.64 48.26) (layer "F.SilkS") (tstamp 6874f1ac-e9dc-46be-a27b-db7a8de1251b)
+  (gr_text "${TITLE}-${REVISION}\nDesign: Jon Sagebrand\ngithub.com/jonsag" (at 167.64 48.26) (layer "F.SilkS") (tstamp 6874f1ac-e9dc-46be-a27b-db7a8de1251b)
     (effects (font (size 1 1) (thickness 0.15)) (justify left))
   )
   (gr_text "TP5\nV ext < 50V\nZener < V in" (at 116.205 59.055 90) (layer "F.SilkS") (tstamp de56c570-97bb-4c63-ac96-e8cbc91649b5)

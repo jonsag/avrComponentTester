@@ -19,15 +19,9 @@ If you use an another programmer you will have to adapt the avrdude -c switch in
 
 Look in directory  
 
-    KiCAD/avrComponentTester-Jose_Miquel_2-layer
+    KiCAD/avrComponentTester
 
 There you will find schematics and PCB layout.  
-
-In the directory  
-
-    KiCAD/avrComponentTester-Jose_Miquel_2-layer/Gerber
-
-you will find a zip file for PCB manufacturing.  
 
 ## Software
 
@@ -45,11 +39,39 @@ You have to log out user to make new groups available.
 
 #### Adapt software
 
-In Makefile, uncomment line 62 to change direction of the rotary encoder  
+In mega328_color_kit/Makefile, uncomment line to change direction of the rotary encoder  
+
+    #CFLAGS += -DCHANGE_ROTARY_DIRECTION
+
+->
 
     CFLAGS += -DCHANGE_ROTARY_DIRECTION
 
-In autoconf.h, lines 169 and 172:  
+To use USBASP Programmer comment three lines  
+
+    PROGRAMMER=avrispmkII
+    BitClock=1.0
+    PORT=usb
+
+->
+
+    PROGRAMMER=avrispmkII
+    BitClock=1.0
+    PORT=usb
+
+and instead uncomment these three lines  
+
+    #PROGRAMMER=usbasp
+    #BitClock=20
+    #PORT=usb
+
+->
+
+    PROGRAMMER=usbasp
+    BitClock=20
+    PORT=usb
+
+In autoconf.h, modify two lines:  
 
     #define R_L_VAL 6800
     ...
